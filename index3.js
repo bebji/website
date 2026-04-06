@@ -14,12 +14,13 @@
             const input = document.getElementById('text-input');
             if (input.value.trim() === "") return;
 
-            const messageObj = {
+            // Change this to messageObject to match the line below
+            const messageObject = {
                 user: userName,
                 text: input.value
             };
 
-            // 4. Send the message as a JSON string
+            // Now this will work!
             socket.send(JSON.stringify(messageObject));
             input.value = '';
         }
