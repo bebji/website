@@ -2,7 +2,7 @@
         const userName = localStorage.getItem('chatUser');
 
         // 2. Connect to your server (Use your PUBLIC IP if testing on phone)
-        const socket = new WebSocket('ws://192.168.0.110:8080'); 
+        const socket = new WebSocket('wss://5c238e89e9f3bc.lhr.life'); 
 
         // 3. Listen for messages from the server
         socket.onmessage = (event) => {
