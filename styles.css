@@ -5,7 +5,8 @@ h1{
 color: rgb(0, 0, 0);
 text-shadow: 50px;
 font-family: monospace;
-font-size: 50px;
+font-size: 60px;
+position:sticky
 }
 p{
     color: rgb(75, 72, 72);

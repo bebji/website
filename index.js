@@ -40,25 +40,23 @@ let password;
 let username;
 
 document.getElementById("btn").onclick = async function(){
-    username = document.getElementById("usrnm").value;
-    const usrnmdata = await readUsernames(); 
-    const pswddata = await readPasswords();
-    let usernames = JSON.stringify(usrnmdata)
-    let passwords = JSON.stringify(pswddata)
-    JSON.stringify(usernames)
-    console.log(username);
-    console.log(usernames);
+    password = document.getElementById("pswd").value
+    username = document.getElementById("usrnm").value
+    const usernamedata = await readUsernames(); 
+    let usernames = usernamedata.usernames
+    const passworddata = await readPasswords();
+    let passwords = passworddata.passwords
     if(usernames.includes(username)){
+      console.log("username correct")
+      usrindex = usernames.indexOf(username)
+      if(passwords[usrindex] == password){
+        console.log("password correct")
+        password = document.getElementById("pswd").value; 
         console.log("same")
-        usrindex = usernames.indexOf(username)
-        console.log(usrindex, usernames, passwords)
-        document.getElementById("label1").textContent = "password: "
-        document.getElementById("btn").onclick = async function(){
-            password = document.getElementById("usrnm").value; 
-            if(passwords[usrindex] == password){
-                console.log("same")
-                window.location.href = "index2.html";
-            }
+        localStorage.setItem('chatUser', username);
+        window.location.href = "index2.html";
+        } else {
+          console.log("password check failed")
         }
 
     }
