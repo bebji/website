@@ -20,6 +20,7 @@
     <script>
     const socket = new WebSocket('wss://71ptp0zx-8080.use.devtunnels.ms/');
     const form = document.getElementById('form');
+    const username = localStorage.getItem('chatUser');
     const messageInput = document.getElementById('message');
     const messageArea = document.getElementById('messageArea');
 
@@ -35,7 +36,7 @@
         e.preventDefault(); // Stop the page from refreshing
         
         if (messageInput.value && socket.readyState === WebSocket.OPEN) {
-            socket.send(messageInput.value);
+            socket.send(username + ": " + messageInput.value);
             messageInput.value = ''; // Clear input
         }
     });
