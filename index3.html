@@ -25,11 +25,20 @@
     const messageArea = document.getElementById('messageArea');
 
     // 1. Receive messages and display them
+function addMessage(text) {
+    const newMessage = document.createElement('p');
+    newMessage.textContent = text;
+    messageArea.appendChild(newMessage);
+    messageArea.scrollTop = messageArea.scrollHeight;
+}
     socket.onmessage = (event) => {
-        const newMessage = document.createElement('p');
-        newMessage.textContent = event.data;
-        messageArea.appendChild(newMessage);
-    };
+    const data = JSON.parse(event.data);
+    if (data.type === 'history') {
+        data.messages.forEach(msg => addMessage(msg));
+    } else if (data.type === 'message') {
+        addMessage(data.text);
+    }
+};
 
     // 2. Handle sending messages
     form.addEventListener('submit', (e) => {
