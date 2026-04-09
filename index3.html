@@ -11,14 +11,14 @@
         <h1 class="logo">Chat 3</h1>
         <p>made by ben!</p>
         <form class="form" id="form" autocomplete="off">
-            <input class="input" type="text" placeholder="Message" id="message" autocomplete="off">
+            <input class="input" type="text" placeholder="Message" id="message" autocorrect="off">
             <button class="button">Send Message</button>
         </form>
         <div class="messageArea" id="messageArea"></div>
     </div>
 
     <script>
-    const socket = new WebSocket('wss://71ptp0zx-8080.use.devtunnels.ms/');
+    const socket = new WebSocket('wss://://websiteserver-ldkf.onrender.com');
     const form = document.getElementById('form');
     const username = localStorage.getItem('chatUser');
     const messageInput = document.getElementById('message');

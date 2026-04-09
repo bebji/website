@@ -39,6 +39,7 @@ body {
     padding: 10px;
     margin-bottom: 10px;
     width: 100%;
+    height: 75%;
 }
 
 .button {
@@ -69,4 +70,5 @@ body {
     font-weight: bold;
     color: #818181;
 }
+
 
