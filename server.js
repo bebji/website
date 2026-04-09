@@ -1,7 +1,7 @@
 const WebSocket = require('ws');
 
 // Use the port your tunnel is pointing to
-const wss = new WebSocket.Server({ port: 8080 });
+const wss = new WebSocket.Server({ port: process.env.PORT || 8080 });
 
 wss.on('connection', (ws) => {
     console.log('client connected');
