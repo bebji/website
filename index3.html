@@ -12,6 +12,7 @@
         <p>made by ben!</p>
         <form class="form" id="form" autocomplete="off">
             <input class="input" type="text" placeholder="Message" id="message" autocorrect="off">
+            <input type="file" id="imageInput" accept="image/*">
             <button class="button">Send Message</button>
         </form>
         <div class="messageArea" id="messageArea"></div>
@@ -23,9 +24,24 @@
     const username = localStorage.getItem('chatUser');
     const messageInput = document.getElementById('message');
     const messageArea = document.getElementById('messageArea');
+    const imageInput = document.getElementById('imageInput');
 
     // 1. Receive messages and display them
 function addMessage(text) {
+    try {
+        const parsed = JSON.parse(text);
+        if (parsed.type === 'image') {
+            const p = document.createElement('p');
+            p.textContent = parsed.user + ":";
+            const img = document.createElement('img');
+            img.src = parsed.data;
+            img.style.maxWidth = "200px";
+            messageArea.appendChild(p);
+            messageArea.appendChild(img);
+            messageArea.scrollTop = messageArea.scrollHeight;
+            return;
+        }
+    } catch(e) {}
     const newMessage = document.createElement('p');
     newMessage.textContent = text;
     messageArea.appendChild(newMessage);
@@ -42,14 +58,29 @@ function addMessage(text) {
 
     // 2. Handle sending messages
     form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const file = imageInput.files[0];
+    if (file) {    
+        const reader = new FileReader();
+        reader.onload = () => {
+            socket.send(JSON.stringify({ type: 'image', user: username, data: reader.result }));
+            imageInput.value = '';
+        };         
+        reader.readAsDataURL(file);
+    } else if (messageInput.value && socket.readyState === WebSocket.OPEN) {
+        socket.send(username + ": " + messageInput.value);
+        messageInput.value = '';
+    }              
+});                
+    form.addEventListener('submit', (e) => {
         e.preventDefault(); // Stop the page from refreshing
-        
+                   
         if (messageInput.value && socket.readyState === WebSocket.OPEN) {
             socket.send(username + ": " + messageInput.value);
             messageInput.value = ''; // Clear input
-        }
-    });
-
+        }          
+    });            
+                   
     // Optional: Log connection status
     socket.onopen = () => console.log("Connected to server");
 socket.onerror = (err) => console.error("Socket Error:", err);
