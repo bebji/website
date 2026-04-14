@@ -9,8 +9,14 @@ var retry = document.getElementById("retry")
 retry.style.display = "none";
 var lost = false
 var started = false
-var min = 600
-var max = 2400
+var points = 0 
+var pointsbox = document.getElementById("pointsbox")
+var scored = false
+var min = 1
+var max = 4
+function roulette(percent) {
+    return Math.random() * 100 < percent;
+}
 function jump(){
     if(!lost){
         if(!started){
@@ -35,17 +41,40 @@ retry.addEventListener('click', () => {
     block.style.animationPlayState = "paused";
     lost = false;
     started = false;
+    points = 0;
+    pointsbox.textContent = "0";
+    scored = false;
 });
 var checkded = setInterval(function(){
     if (!started) return;   
     var characterRect = character.getBoundingClientRect();
     var blockRect = block.getBoundingClientRect();
-    if(characterRect.right < blockRect.left||
-       characterRect.bottom < blockRect.top && 
-       characterRect.bottom < blockRect.top || 
-       !characterRect.top > blockRect.bottom){
-        block.style.animationDuration = string(Math.floor(Math.random() * (max - min + 1)) + min) + ms;
+if (blockRect.left < 0 && !scored) {
+    scored = true;
+    points += 1;
+    pointsbox.textContent = String(points);
+    var speedchoice = Math.floor(Math.random() * (max - min + 1)) + min
+    var newDuration;
+    if(speedchoice === 1){
+        newDuration = "2000ms";
+    } else if(speedchoice === 2) {
+        newDuration = "3000ms";
+    } else if(speedchoice === 3){
+        newDuration = "3500ms";
+    } else {
+        newDuration = "2800ms";
     }
+    // restart animation with new duration
+    block.style.animation = "none";
+    block.offsetHeight; // force reflow
+    block.style.animation = `block ${newDuration} infinite linear`;
+    block.style.animationPlayState = "running";
+    
+}
+if (blockRect.left > 100) {
+    scored = false;
+}
+        
     var overlap = !(characterRect.right < blockRect.left|| 
                     characterRect.left > blockRect.right || 
                     characterRect.bottom < blockRect.top || 
