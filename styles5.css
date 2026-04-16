@@ -26,6 +26,16 @@
     animation-play-state: paused;
 
 }
+#block2{
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 130px;
+    left: 600;
+    animation: block2 4s infinite linear;
+    animation-play-state: paused;
+
+}
 #jerry{
     width: 35px;
     height: 30px;
@@ -56,14 +66,18 @@
     height: 30px;
 }
 .animate{
-    animation: jump 500ms cubic-bezier(0.25, 0.1, 0.25, 1);
+    animation: jump 450ms cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 @keyframes block{
     0%{left:2000px;}
     100%{left:-480px;}
 }
+@keyframes block2{
+    0%{left:1960px;}
+    100%{left:-520px;}
+}
 @keyframes jump{
     0% { transform: translateY(0); }
-    50% { transform: translateY(-80px); } /* Higher jump for 200px game height */
+    50% { transform: translateY(-90px); } /* Higher jump for 200px game height */
     100% { transform: translateY(0); }
 }
