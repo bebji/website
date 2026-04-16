@@ -4,12 +4,13 @@
 <head>
     <title>chat</title>
     <link rel="stylesheet" href="styles3.css">
+    <button id="exit">exit chat</button>
 </head>
 
 <body>
     <div class="container">
         <h1 class="logo">Chat 3</h1>
-        <p>made by ben!</p>
+        <p>made by ben! <br>warning: if you get in trouble for using this it aint my fault</p>
         <form class="form" id="form" autocomplete="off">
             <input class="input" type="text" placeholder="Message" id="message" autocorrect="off">
             <input type="file" id="imageInput" accept="image/*">
@@ -25,6 +26,10 @@
     const messageInput = document.getElementById('message');
     const messageArea = document.getElementById('messageArea');
     const imageInput = document.getElementById('imageInput');
+    const exit = document.getElementById('exit')
+    exit.addEventListener("click", () => {
+        window.location.href = "index2.html";
+    })
 
     // 1. Receive messages and display them
 function addMessage(text) {
