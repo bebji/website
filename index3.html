@@ -4,10 +4,10 @@
 <head>
     <title>chat</title>
     <link rel="stylesheet" href="styles3.css">
-    <button id="exit">exit chat</button>
 </head>
 
 <body>
+    <button id="exit">exit chat</button>
     <div class="container">
         <h1 class="logo">Chat 3</h1>
         <p>made by ben! <br>warning: if you get in trouble for using this it aint my fault</p>
@@ -30,6 +30,9 @@
     exit.addEventListener("click", () => {
         window.location.href = "index2.html";
     })
+    if(username === "ben"){
+
+    }
 
     // 1. Receive messages and display them
 function addMessage(text) {
@@ -88,7 +91,8 @@ function addMessage(text) {
                    
     // Optional: Log connection status
     socket.onopen = () => {
-        socket.send(JSON.stringify({ type: 'ping'})); 
+        socket.send(JSON.stringify({ type: 'join', user: username }));
+        console.log("Connected to server");
     }
 socket.onerror = (err) => console.error("Socket Error:", err);
     </script>

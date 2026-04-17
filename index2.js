@@ -1,6 +1,10 @@
 const meme_button = document.getElementById("meme_button");
 const memes = document.querySelectorAll("img[id^='mem']");
+const suggestionsbtn = document.getElementById("suggestions")
 let memes_hidden = true;
+suggestionsbtn.addEventListener("click", () => {
+    window.location.href = "index2.html";
+});
 async function showmemes(){
     for (const img of memes) {
         img.style.visibility = "visible";
