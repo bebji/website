@@ -8,10 +8,11 @@ body {
 }
 
 .container {
-    max-width: 400px;
+    max-width: 80vw;
+    height:80vh;
     margin: 50px auto;
     padding: 20px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.849);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -57,7 +58,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    height: 200px;
+    height: 60vh;
     order: 1; 
     overflow-y: scroll;
 }
