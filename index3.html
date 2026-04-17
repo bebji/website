@@ -87,7 +87,9 @@ function addMessage(text) {
     });            
                    
     // Optional: Log connection status
-    socket.onopen = () => console.log("Connected to server");
+    socket.onopen = () => {
+        socket.send(JSON.stringify({ type: 'ping'})); 
+    })
 socket.onerror = (err) => console.error("Socket Error:", err);
     </script>
 </body>
